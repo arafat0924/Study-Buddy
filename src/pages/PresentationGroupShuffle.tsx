@@ -340,10 +340,11 @@ export default function CourseGroupShuffle() {
                 <div className="pt-4">
                   <button
                     onClick={handleGenerate}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-indigo-500 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-3.5 rounded-xl font-bold text-lg hover:from-emerald-500 hover:to-teal-500 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 relative overflow-hidden group/btn"
                   >
-                    <Play size={20} />
-                    Start Presentations
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity blur-xl pointer-events-none" />
+                    <Play size={20} className="relative z-10" />
+                    <span className="relative z-10">Save Details</span>
                   </button>
                 </div>
               </div>
@@ -369,10 +370,11 @@ export default function CourseGroupShuffle() {
                 <div className="flex items-center gap-4 w-full sm:w-auto justify-center">
                   <button
                     onClick={handleShuffle}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-lg font-bold hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2.5 rounded-lg font-bold hover:from-emerald-500 hover:to-teal-500 transition-all shadow-lg hover:shadow-emerald-500/40 transform hover:-translate-y-0.5 relative overflow-hidden group/shuf"
                   >
-                    <Shuffle size={18} />
-                    Shuffle Presentation Order
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/shuf:opacity-100 transition-opacity blur-xl pointer-events-none" />
+                    <Shuffle size={18} className="relative z-10" />
+                    <span className="relative z-10">Shuffle Presentation Order</span>
                   </button>
                   {lastShuffle && (
                     <span className="text-xs text-blue-200 hidden md:block">
