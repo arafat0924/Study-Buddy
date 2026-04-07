@@ -1,0 +1,5 @@
+{
+  "name": "Course Group Manager",
+  "description": "A responsive web application for managing undergraduate course group presentations with fair shuffle functionality.",
+  "requestFramePermissions": []
+}

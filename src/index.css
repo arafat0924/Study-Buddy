@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Comic Sans MS", "Comic Sans", cursive, ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  @keyframes scanline {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .scanline {
+    animation: scanline 3s linear infinite;
+  }
+}
