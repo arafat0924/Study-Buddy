@@ -10,7 +10,7 @@ function Layout() {
   const isCourseGroupPage = location.pathname === '/course-group';
 
   return (
-    <div className="min-h-screen font-sans text-white selection:bg-blue-200 flex flex-col pt-0 bg-[#0a174e] relative isolate overflow-x-hidden">
+    <div className="min-h-screen font-sans text-white selection:bg-blue-200 flex flex-col pt-0 bg-[#030821] relative isolate overflow-x-hidden">
       {!isCourseGroupPage && <ThreeBackground />}
       <Navbar />
       <div className="relative z-0 flex-1 flex flex-col pt-24">

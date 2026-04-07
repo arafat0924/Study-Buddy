@@ -16,7 +16,7 @@ export default function Landing() {
           Your trustworthy bruh for fair and random shuffles. Choose your tool below.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/course-group" className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25">
+          <Link to="/course-group" className="px-8 py-4 bg-gradient-to-r from-blue-400 to-indigo-300 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25">
             Presentation Group Shuffle
           </Link>
           <Link to="/fifa" className="px-8 py-4 bg-red-600 hover:bg-red-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-red-500/25">
