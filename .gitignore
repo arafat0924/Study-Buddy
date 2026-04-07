@@ -1,1 +1,8 @@
 node_modules
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+public/pdf.worker.min.mjs
+demo ui.mp4
+AGENTS.md

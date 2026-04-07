@@ -1,41 +1,110 @@
-import { Link, useLocation } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { LANGS, useI18n } from '@/i18n';
+import { useTheme } from './Theme';
+import Icon from './Icon';
+
+export const NAV = [
+  { href: '/admission-documents/', key: 'admission' },
+  { href: '/pdf-tools/', key: 'pdf' },
+  { href: '/scan-to-pdf/', key: 'scan' },
+  { href: '/presentation-shuffle/', key: 'shuffle' },
+] as const;
+
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
 
 export default function Navbar() {
-  const location = useLocation();
+  const { d, lang, setLang } = useI18n();
+  const { theme, toggle } = useTheme();
+  const path = norm(usePathname() || '/');
+  const [menu, setMenu] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { setMenu(false); setLangOpen(false); }, [path]);
+
+  useEffect(() => {
+    if (!langOpen) return;
+    const off = (e: PointerEvent) => { if (!langRef.current?.contains(e.target as Node)) setLangOpen(false); };
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') setLangOpen(false); };
+    document.addEventListener('pointerdown', off);
+    document.addEventListener('keydown', esc);
+    return () => { document.removeEventListener('pointerdown', off); document.removeEventListener('keydown', esc); };
+  }, [langOpen]);
+
+  const current = LANGS.find((l) => l.code === lang)!;
 
   return (
-    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
-      <nav className="bg-[#11235a]/80 backdrop-blur-lg rounded-2xl border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:border-blue-500/40 transition-all duration-300 pointer-events-auto overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-400/10 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scanline" />
-        <div className="px-6 h-12 flex items-center gap-8 relative z-10">
-          <Link to="/" className="font-bold text-lg tracking-tight text-white hover:text-blue-300 transition-colors">
-            TrustMeBruh
+    <>
+      <header className="nav">
+        <nav className="nav-pill" aria-label="Main">
+          <Link href="/" className="brand" aria-label="Study Buddy — home">
+            <span className="brand-mark"><Icon name="logo" /></span>
+            Study Buddy
           </Link>
-          <div className="flex gap-6 items-center">
-            <Link
-              to="/course-group"
-              className={`text-xs font-medium transition-all duration-300 px-3 py-1 rounded-lg ${location.pathname === '/course-group'
-                ? 'text-white bg-blue-600/20 shadow-[0_0_10px_rgba(37,99,235,0.2)]'
-                : 'text-blue-200 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              Presentation Group Shuffle
-            </Link>
-            <Link
-              to="/fifa"
-              className={`text-xs font-medium transition-all duration-300 px-3 py-1 rounded-lg ${location.pathname === '/fifa'
-                ? 'text-white bg-blue-600/20 shadow-[0_0_10px_rgba(37,99,235,0.2)]'
-                : 'text-blue-200 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              Fifa Tournament Shuffle
-            </Link>
-            <button className="text-[10px] uppercase tracking-widest font-bold text-blue-400/40 cursor-not-allowed select-none" disabled>
-              More Coming...
-            </button>
+          <div className="nav-links">
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href} className={`nav-link${path === n.href ? ' is-active' : ''}`}>
+                {d.nav[n.key]}
+              </Link>
+            ))}
           </div>
+        </nav>
+
+        <div className="nav-tools">
+          <div className="lang-menu" ref={langRef}>
+            <button
+              className="nav-round"
+              onClick={() => setLangOpen((o) => !o)}
+              aria-haspopup="menu"
+              aria-expanded={langOpen}
+              aria-label={d.nav.language}
+            >
+              <Icon name="globe" />
+              {current.short}
+            </button>
+            {langOpen && (
+              <div className="lang-pop glass" role="menu">
+                {LANGS.map((l) => (
+                  <button
+                    key={l.code}
+                    role="menuitem"
+                    aria-current={l.code === lang}
+                    onClick={() => { setLang(l.code); setLangOpen(false); }}
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <button className="nav-round" onClick={toggle} aria-label={d.nav.theme} title={d.nav.theme}>
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
+          </button>
+          <button
+            className="nav-round nav-menu-btn"
+            onClick={() => setMenu((m) => !m)}
+            aria-expanded={menu}
+            aria-label={d.nav.menu}
+          >
+            <Icon name={menu ? 'x' : 'menu'} />
+          </button>
         </div>
-      </nav>
-    </div>
+      </header>
+
+      {menu && (
+        <div className="mobile-sheet glass">
+          <Link href="/" className={path === '/' ? 'is-active' : ''}>{d.nav.home}</Link>
+          {NAV.map((n) => (
+            <Link key={n.href} href={n.href} className={path === n.href ? 'is-active' : ''}>
+              {d.nav[n.key]}
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
