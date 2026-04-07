@@ -452,7 +452,7 @@ export default function CourseGroupShuffle() {
         <footer className="mt-auto py-8 border-t border-[#1a2a5c] text-center text-blue-200 print:hidden bg-[#030821]/85 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4">
             <p className="mb-3 text-sm">
-              Developed by Md. Arafat Hosen (赞欣)
+              ©️ Md. Arafat Hosen (赞欣)
             </p>
 
           </div>
