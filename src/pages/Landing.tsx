@@ -3,11 +3,11 @@ import { motion } from 'motion/react';
 
 export default function Landing() {
   return (
-    <div className="w-full flex-1 flex flex-col items-center justify-center px-4 relative overflow-hidden pt-48">
+    <div className="w-full flex-1 flex flex-col items-center justify-center px-4 relative overflow-hidden pt-36">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center max-w-3xl relative z-10 mt-32"
+        className="text-center max-w-3xl relative z-10 mt-24"
       >
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">
           Welcome to TrustMeBruh
@@ -28,7 +28,7 @@ export default function Landing() {
       <footer className="mt-auto py-8 w-full text-center text-blue-200">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-sm">
-            Developed by Md. Arafat Hosen (赞欣)
+            ©️ Md. Arafat Hosen (赞欣)
           </p>
         </div>
       </footer>
