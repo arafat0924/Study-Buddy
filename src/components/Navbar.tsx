@@ -31,7 +31,7 @@ export default function Navbar() {
               Fifa Tournament Shuffle
             </Link>
             <button className="text-[10px] uppercase tracking-widest font-bold text-blue-400/40 cursor-not-allowed select-none" disabled>
-              More...
+              More Coming...
             </button>
           </div>
         </div>
